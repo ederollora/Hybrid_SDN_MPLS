@@ -1,0 +1,41 @@
+from ipaddress import ip_address
+
+bfrt.mpls_int_switch.pipe.Ingress.ldp_udp_t.add_with_send_to(48, 646, 144)
+bfrt.mpls_int_switch.pipe.Ingress.ldp_udp_t.add_with_send_to(144, 646, 48)
+bfrt.mpls_int_switch.pipe.Ingress.ldp_udp_t.add_with_send_to(49, 646, 145)
+bfrt.mpls_int_switch.pipe.Ingress.ldp_udp_t.add_with_send_to(145, 646, 49)
+
+
+bfrt.mpls_int_switch.pipe.Ingress.ldp_tcp_t.add_with_send_to(ip_address("192.168.99.2"), port=48)
+bfrt.mpls_int_switch.pipe.Ingress.ldp_tcp_t.add_with_send_to(ip_address("192.168.99.1"), port=144)
+bfrt.mpls_int_switch.pipe.Ingress.ldp_tcp_t.add_with_send_to(ip_address("192.168.98.2"), port=49)
+bfrt.mpls_int_switch.pipe.Ingress.ldp_tcp_t.add_with_send_to(ip_address("192.168.98.1"), port=145)
+
+bfrt.mpls_int_switch.pipe.Ingress.process_switch_id.add_with_get_switch_id(144, 1)
+bfrt.mpls_int_switch.pipe.Ingress.process_switch_id.add_with_get_switch_id(48, 1)
+bfrt.mpls_int_switch.pipe.Ingress.process_switch_id.add_with_get_switch_id(145, 2)
+bfrt.mpls_int_switch.pipe.Ingress.process_switch_id.add_with_get_switch_id(49, 2)
+
+bfrt.mpls_int_switch.pipe.Ingress.mpls_add_t.add_with_add_mpls_header(1, ip_address("10.0.0.1"), 1001)
+bfrt.mpls_int_switch.pipe.Ingress.mpls_add_t.add_with_add_mpls_header(2, ip_address("10.0.0.2"), 5995)
+bfrt.mpls_int_switch.pipe.Ingress.mpls_add_t.add_with_add_mpls_header(1, ip_address("10.0.0.10"), 1111)
+bfrt.mpls_int_switch.pipe.Ingress.mpls_add_t.add_with_add_mpls_header(2, ip_address("10.0.0.20"), 5555)
+
+bfrt.mpls_int_switch.pipe.Ingress.mpls_rm_t.add_with_remove_mpls_header(1, ip_address("10.0.0.1"))
+bfrt.mpls_int_switch.pipe.Ingress.mpls_rm_t.add_with_remove_mpls_header(2, ip_address("10.0.0.2"))
+bfrt.mpls_int_switch.pipe.Ingress.mpls_rm_t.add_with_remove_mpls_header(1, ip_address("10.0.0.10"))
+bfrt.mpls_int_switch.pipe.Ingress.mpls_rm_t.add_with_remove_mpls_header(2, ip_address("10.0.0.20"))
+
+bfrt.mpls_int_switch.pipe.Ingress.mpls_fwd_t.add_with_send_to(1001, 48)
+bfrt.mpls_int_switch.pipe.Ingress.mpls_fwd_t.add_with_send_to(5995, 49)
+bfrt.mpls_int_switch.pipe.Ingress.mpls_fwd_t.add_with_send_to(1111, 48)
+bfrt.mpls_int_switch.pipe.Ingress.mpls_fwd_t.add_with_send_to(5555, 49)
+
+bfrt.mpls_int_switch.pipe.Ingress.ipv4_fwd_t.add_with_send_to(ip_address("10.0.0.1"), 144)
+bfrt.mpls_int_switch.pipe.Ingress.ipv4_fwd_t.add_with_send_to(ip_address("10.0.0.2"), 145)
+bfrt.mpls_int_switch.pipe.Ingress.ipv4_fwd_t.add_with_send_to(ip_address("10.0.0.10"), 144)
+bfrt.mpls_int_switch.pipe.Ingress.ipv4_fwd_t.add_with_send_to(ip_address("10.0.0.20"), 145)
+
+
+#bfrt.mpls_int_switch.pipe.Ingress.add_int_t.add_with_add_int_headers(1001)
+#bfrt.mpls_int_switch.pipe.Ingress.add_int_t.add_with_add_int_headers(1111)

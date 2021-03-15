@@ -1,0 +1,53 @@
+enable
+
+conf t
+interface FastEthernet0/0
+ip address 192.168.99.2 255.255.255.0
+mpls ip
+no shut
+end
+
+conf t
+interface FastEthernet0/1
+ip address 192.168.101.2 255.255.255.0
+mpls ip
+no shut
+end
+
+conf t
+interface FastEthernet1/0
+ip address 192.168.100.2 255.255.255.0
+mpls ip
+no shut
+end
+
+
+conf t
+arp 192.168.99.1 649d.99b1.6440 arpa
+hostname R1
+mpls label range 10001 1048575 static 16 10000
+mpls static crossconnect 1001 FastEthernet0/1 192.168.101.1 2002
+mpls static crossconnect 3993 FastEthernet0/0 192.168.99.1 2992
+mpls static crossconnect 1111 FastEthernet1/0 192.168.100.1 2222
+mpls static crossconnect 7777 FastEthernet0/0 192.168.99.1 8888
+ip route 192.168.99.0 255.255.255.0 FastEthernet0/0
+ip route 192.168.101.0 255.255.255.0 FastEthernet0/1
+ip route 192.168.100.0 255.255.255.0 FastEthernet1/0
+exit
+
+
+
+copy running-config startup-config
+show interfaces | i (.* line protocol is )|(.* address is)
+
+show mpls forwarding-table
+show mpls label range
+show mpls static binding ipv4
+
+# out of config
+show arp
+show mac-address-table (?)
+
+# mpls static crossconnect incoming-label outgoing-intf nexthop outgoing-label
+# no mpls static crossconnect incoming-label outgoing-intf nexthop outgoing-label
+show mpls static crossconnect

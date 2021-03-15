@@ -1,0 +1,4 @@
+sudo python3 ldp_server.py 192.168.99.1 192.168.99.1 192.168.200.1 vf0_2 > ldp_server_sw1_1.log
+sudo python3 ldp_server.py 192.168.100.1 192.168.100.1 192.168.200.2 vf0_5 > ldp_server_sw2_1.log
+sudo python3 ldp_server.py 192.168.101.1 192.168.101.1 192.168.201.1 vf0_6 > ldp_server_sw2_2.log
+sudo python3 ldp_server.py 192.168.102.1 192.168.102.1 192.168.201.2 vf0_11 > ldp_server_sw3_1.log

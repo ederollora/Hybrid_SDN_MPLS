@@ -1,0 +1,37 @@
+enable
+
+conf t
+interface FastEthernet0/0
+ip address 192.168.101.1 255.255.255.0
+mpls ip
+no shut
+end
+
+conf t
+interface FastEthernet0/1
+ip address 192.168.102.1 255.255.255.0
+mpls ip
+no shut
+end
+
+conf t
+hostname R2
+mpls label range 10001 1048575 static 16 10000
+mpls static crossconnect 2002 FastEthernet0/1 192.168.102.2 3003
+mpls static crossconnect 4994 FastEthernet0/0 192.168.101.2 3993
+ip route 192.168.101.0 255.255.255.0 FastEthernet0/0
+ip route 192.168.102.0 255.255.255.0 FastEthernet0/1
+exit
+
+
+
+copy running-config startup-config
+show interfaces | i (.* line protocol is )|(.* address is)
+
+show mpls forwarding-table
+show mpls label range
+show mpls static binding ipv4
+
+# mpls static crossconnect incoming-label outgoing-intf nexthop outgoing-label
+# no mpls static crossconnect incoming-label outgoing-intf nexthop outgoing-label
+show mpls static crossconnects

@@ -1,0 +1,23 @@
+
+
+ucli
+pm
+port-add 3/0 10G NONE
+port-add 3/1 10G NONE
+an-set 3/- 2
+port-enb 3/-
+show
+
+exit
+
+bfrt
+
+from ipaddress import ip_address
+
+bfrt.mpls_int_switch.pipe.Ingress.process_switch_id.add_with_get_switch_id(ingress_port=144, s_id=1)
+
+bfrt.mpls_int_switch.pipe.Ingress.mpls_exc_t.add_with_exchange_mpls_label(label_id=1000, label=1001)
+
+bfrt.mpls_int_switch.pipe.Ingress.mpls_fwd_t.add_with_send_to(label_id=1001, port=145)
+
+bfrt.mpls_int_switch.pipe.Egress.timestamp_eg_t.set_default_with_add_egs_timestamp(offset=78)

@@ -1,0 +1,326 @@
+{
+    "tables": {
+        "tb_out_mpls": {
+            "rules": [
+                {
+                    "action": {
+                        "data": {
+                            "my_id": {
+                                "value": "2"
+                            }
+                        }, 
+                        "type": "add_out_label_2"
+                    }, 
+                    "name": "sw2_out_label_1", 
+                    "match": {
+                        "ipv4.dstAddr": {
+                            "value": "10.0.0.4"
+                        }, 
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.3"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "my_id": {
+                                "value": "1"
+                            }
+                        }, 
+                        "type": "add_out_label_1"
+                    }, 
+                    "name": "sw1_out_label_1", 
+                    "match": {
+                        "ipv4.dstAddr": {
+                            "value": "10.0.0.4"
+                        }, 
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.0"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "my_id": {
+                                "value": "3"
+                            }
+                        }, 
+                        "type": "add_out_label_3"
+                    }, 
+                    "name": "sw3_out_label_1", 
+                    "match": {
+                        "ipv4.dstAddr": {
+                            "value": "10.0.0.4"
+                        }, 
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.9"
+                        }
+                    }
+                }
+            ]
+        }, 
+        "tb_cp_fwd": {
+            "rules": [
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.2"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw1_r_1", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.1"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.1"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw1_r_2", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.2"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.5"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw2_r1_1", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.3"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.3"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw2_r1_2", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.5"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.6"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw2_r2_1", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.4"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.4"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw2_r2_2", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.6"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.11"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw3_r_1", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.9"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "out_pt": {
+                                "value": "v0.9"
+                            }
+                        }, 
+                        "type": "cp_fwd"
+                    }, 
+                    "name": "sw3_r_2", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.11"
+                        }
+                    }
+                }
+            ]
+        }, 
+        "tb_mpls_fwd": {
+            "rules": [
+                {
+                    "action": {
+                        "data": {
+                            "egress_spec": {
+                                "value": "v0.1"
+                            }, 
+                            "dst_mac": {
+                                "value": "c2:01:07:18:00:00"
+                            }, 
+                            "label": {
+                                "value": "1000"
+                            }
+                        }, 
+                        "type": "mpls_fwd"
+                    }, 
+                    "name": "sw1_mpls_fwd_1", 
+                    "match": {
+                        "mpls.label": {
+                            "value": "0"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "egress_spec": {
+                                "value": "v0.4"
+                            }, 
+                            "dst_mac": {
+                                "value": "c2:04:71:61:00:00"
+                            }, 
+                            "label": {
+                                "value": "1003"
+                            }
+                        }, 
+                        "type": "mpls_fwd"
+                    }, 
+                    "name": "sw2_mpls_fwd_1", 
+                    "match": {
+                        "mpls.label": {
+                            "value": "1002"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "egress_spec": {
+                                "value": "v0.10"
+                            }, 
+                            "dst_mac": {
+                                "value": "c2:01:44:33:22:11"
+                            }, 
+                            "label": {
+                                "value": "1006"
+                            }
+                        }, 
+                        "type": "mpls_fwd"
+                    }, 
+                    "name": "sw3_mpls_fwd_1", 
+                    "match": {
+                        "mpls.label": {
+                            "value": "1005"
+                        }
+                    }
+                }
+            ]
+        }, 
+        "tb_int": {
+            "rules": [
+                {
+                    "action": {
+                        "type": "add_int"
+                    }, 
+                    "name": "sw1_ins_int_1", 
+                    "match": {
+                        "ipv4.dstAddr": {
+                            "value": "10.0.0.4"
+                        }, 
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.0"
+                        }
+                    }
+                }
+            ]
+        }, 
+        "tb_in_mpls": {
+            "rules": [
+                {
+                    "action": {
+                        "data": {
+                            "my_id": {
+                                "value": "2"
+                            }
+                        }, 
+                        "type": "add_in_label1"
+                    }, 
+                    "name": "sw2_in_label_1", 
+                    "match": {
+                        "ipv4.dstAddr": {
+                            "value": "10.0.0.4"
+                        }, 
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.3"
+                        }
+                    }
+                }
+            ]
+        }, 
+        "tb_insert_mpls": {
+            "rules": [
+                {
+                    "action": {
+                        "type": "add_mpls"
+                    }, 
+                    "name": "sw1_ins_mpls", 
+                    "match": {
+                        "ipv4.dstAddr": {
+                            "value": "10.0.0.4"
+                        }, 
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.0"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

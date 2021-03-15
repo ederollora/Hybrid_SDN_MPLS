@@ -1,0 +1,71 @@
+python3.7 send.py \
+--interface ens1f3 \
+--packets 1 \
+--ethernet AA:BB:CC:DD:EE:FF,00:11:22:33:44:55 \
+--mpls 1,1000 \
+--ip 192.168.1.1,192.168.2.2,0x17 \
+--udp 1000 \
+--intshim \
+--intmeta \
+--imstack 1,0x11223344 \
+--bytes 10 \
+--randbytes
+
+test1: Regular L3 fwd
+sudo python3.7 send.py \
+ --interface ens1f2 \
+ --packets 1000 \
+ --ethernet AA:BB:CC:DD:EE:FF,00:11:22:33:44:55 \
+ --ip 192.168.1.1,192.168.2.2,0x0 \
+ --udp 1000 \
+ --bytes 1000
+
+
+test2: Add MPLS and fwd based on MPLS
+sudo python3.7 send.py \
+ --interface ens1f2 \
+ --packets 1000 \
+ --ethernet AA:BB:CC:DD:EE:FF,00:11:22:33:44:55 \
+ --ip 192.168.1.1,192.168.2.2,0x0 \
+ --udp 1000 \
+ --bytes 1000
+
+
+test3: Add MPLS, add INT shim/meta and INT metadata
+
+sudo python3.7 send.py \
+ --interface ens1f2 \
+ --packets 1000 \
+ --ethernet AA:BB:CC:DD:EE:FF,00:11:22:33:44:55 \
+ --ip 192.168.1.1,192.168.2.2,0x0 \
+ --udp 1000 \
+ --bytes 1000
+
+
+test4: add int metadata, exchange MPLS and fwd MPLS
+
+sudo python3.7 send.py \
+--interface ens1f2 \
+ --packets 1000 \
+ --ethernet AA:BB:CC:DD:EE:FF,00:11:22:33:44:55 \
+ --mpls 1,1000 \
+ --ip 192.168.1.1,192.168.2.2,0x17 \
+ --udp 1000 \
+ --intshim \
+ --intmeta \
+ --imstack 1,123456 \
+ --bytes 1000
+
+
+test5: add INT metadata then remove all INT and restore packet (MPLS already removed)
+
+sudo python3.7 send.py \
+ --interface ens1f2 \
+ --packets 1000 \
+ --ethernet AA:BB:CC:DD:EE:FF,00:11:22:33:44:55 \
+ --ip 192.168.1.1,192.168.2.2,0x17 \
+ --udp 1000 \
+ --intshim \
+ --intmeta \
+ --imstack 1,123456 \
+ --bytes 1000

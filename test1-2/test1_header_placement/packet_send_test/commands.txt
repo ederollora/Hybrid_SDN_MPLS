@@ -1,0 +1,5 @@
+# TEst INT over MPLS and TCP
+sudo python send_packet.py vf0_0 10.0.0.1 10.0.0.4
+
+#Test INT over ESP
+sudo python send_pcap.py vf0_0 /home/siet/ESP_packet.pcap
